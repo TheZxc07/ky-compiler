@@ -4,7 +4,7 @@ int main() {
     int Z = 99;
     int result;
 
-    while (X > 0) {
+    until (X > 0) {
         result = X + Y;
         printf("Result: %d\n", result);
         X = X - 1;

@@ -380,8 +380,8 @@ static const YY_CHAR yy_ec[256] =
         7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
         1,    1,    1,    1,    1,    1,    7,    7,    7,    7,
 
-        8,    7,    7,    9,   10,    7,    7,   11,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    7,   12,    7,
+        7,    7,    7,    7,    8,    7,    7,    9,    7,   10,
+        7,    7,    7,    7,    7,   11,   12,    7,    7,    7,
         7,    7,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -407,8 +407,8 @@ static const YY_CHAR yy_meta[13] =
 
 static const flex_int16_t yy_base[19] =
     {   0,
-        0,    0,   20,   21,   21,   21,   21,   13,    0,    9,
-       11,    0,    6,    4,    6,    0,   21,   11
+        0,    0,   20,   21,   21,   21,   21,   13,    0,    8,
+       11,    0,    5,    7,    5,    0,   21,   11
     } ;
 
 static const flex_int16_t yy_def[19] =
@@ -741,7 +741,7 @@ YY_RULE_SETUP
 case 3:
 YY_RULE_SETUP
 #line 9 "scanner.flex"
-{ return TOKEN_WHILE; }
+{ return TOKEN_UNTIL; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP

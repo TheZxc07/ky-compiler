@@ -11,7 +11,7 @@ SRCS = $(wildcard $(SRC_DIR)/*.c)
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRCS))
 
 # Output executable
-TARGET = $(BUILD_DIR)/main.exe
+TARGET = $(BUILD_DIR)/ky_compiler.exe
 
 # Default target
 all: $(TARGET)
