@@ -69,11 +69,12 @@ void print_list(llist_t* token_list){
     }
 }
 
-void pop_front(llist* token_list, token_st* out){
+void pop_front(llist_t* token_list, token_st* out){
     if (token_list == NULL){
         return;
     }
-
+    //printf("BEFORE POPPING\n");
+    //print_list(token_list);
     token_node_t* p_front = token_list->__p_head;
 
     if (p_front == NULL){
@@ -83,13 +84,17 @@ void pop_front(llist* token_list, token_st* out){
         out->token_type = p_front->__token_type;
         token_list->__p_head = p_front->__p_next;
     }
+    //printf("AFTER POPPING\n");
+    //print_list(token_list);
 }
 
-void push_front(llist* token_list, token_st* in){
+void push_front(llist_t* token_list, token_st* in){
     if (token_list == NULL){
         return;
     }
+    //printf("BEFORE PUSHING\n");
 
+    //print_list(token_list);
     token_node_t* new_token = (token_node_t*)malloc(sizeof(token_node_t));
 
     new_token->__s_token = in->s_token;
@@ -99,7 +104,9 @@ void push_front(llist* token_list, token_st* in){
     if(token_list->__p_head == NULL){
         token_list->__p_head = new_token;
     } else {
-        new_token->__p_next = token_list->__p_head->__p_next;
+        new_token->__p_next = token_list->__p_head;
         token_list->__p_head = new_token; 
     }
+    //printf("AFTER PUSHING\n");
+    //print_list(token_list);
 }
