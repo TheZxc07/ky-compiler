@@ -3,6 +3,7 @@
 
 #include "token.h"
 #include "llist.h"
+#include <stdlib.h>
 
 token_st* scan_token(llist_t* token_stream);
 void putback_token(token_st* token, llist_t* token_stream);
