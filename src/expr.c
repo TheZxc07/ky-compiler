@@ -1,5 +1,17 @@
 #include "expr.h"
 
+const char *EXPR_STR_MAP[NUMBER_OF_EXPR] = {
+    "EXPR_ADD     ",
+    "EXPR_SUBTRACT",
+    "EXPR_DIVIDE  ",
+    "EXPR_MULTIPLY",
+    "EXPR_VALUE   ",
+};
+
+const char* expr_kind_symbol[NUMBER_OF_EXPR] = {
+    "+", "-", "/", "*", "INT"
+};
+
 expr* expr_create( expr_t kind,
                    expr *left,
                    expr *right )

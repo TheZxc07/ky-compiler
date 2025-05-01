@@ -1,6 +1,7 @@
 #include "token.h"
 #include "llist.h"
 #include "llg_parser.h"
+#include "expr.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -22,9 +23,11 @@ int main() {
             //printf("token: %s text: %s\n",TOKEN_STR_MAP[t],yytext);
     }
     print_list(token_list);
-    if(parse_prog(token_list)){
+    expr* ast = parse_prog(token_list);
+    if(ast){
         printf("This is a valid program!\n");
     } else {
         printf("This is NOT a valid program!\n");
     }
+    print_ast(ast);
 }
