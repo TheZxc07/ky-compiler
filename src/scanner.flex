@@ -13,6 +13,7 @@ LETTER [a-zA-Z]
 \) { return TOKEN_RPAREN; }
 until { return TOKEN_UNTIL; }
 {LETTER}+ { return TOKEN_IDENT; }
+{DIGIT}+\.{DIGIT}+ {return TOKEN_FLOAT; }
 {DIGIT}+ { return TOKEN_INT; }
 . { return TOKEN_ERROR; }
 %%

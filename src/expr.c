@@ -18,15 +18,27 @@ expr* expr_create( expr_t kind,
 {
     expr* e = malloc(sizeof(*e));
     e->kind = kind;
-    e->value = 0;
+    e->type = TYPE_VOID;
+    e->value.i = 0;
     e->left = left;
     e->right = right;
     return e;
 }
 
-expr* expr_create_value( int value )
+expr* expr_create_int_value( int value )
 {
     expr* e = expr_create(EXPR_VALUE,0,0);
-    e->value = value;
+    e->type = TYPE_INT;
+    e->value.i = value;
+    //printf("%d", e->value.i);
     return e;
 }
+
+expr* expr_create_float_value( float value )
+{
+    expr* e = expr_create(EXPR_VALUE,0,0);
+    e->type = TYPE_FLOAT;
+    e->value.f = value;
+    return e;
+}
+

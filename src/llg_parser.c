@@ -113,8 +113,8 @@ expr* parse_expr_prime(llist_t* token_stream){
 expr* parse_term(llist_t* token_stream){
     //printf("Visted\n"); 
     expr* factor = parse_factor(token_stream);
+    //printf("%d\n", factor->value.i);
     expr* term_prime = parse_term_prime(token_stream);
-
     if (term_prime == NULL){
         return factor;
     } else {
@@ -182,10 +182,11 @@ expr* parse_factor(llist_t* token_stream){
         }
     } else if (t->token_type == TOKEN_INT){
         //printf("%s\n", t->s_token);
-        return expr_create_value(atoi(t->s_token));
+        return expr_create_int_value(atoi(t->s_token));
         //return 1;
     } else if (t->token_type == TOKEN_FLOAT){
-        return expr_create_value(0);
+        //printf("string: %s, float: %lf", t->s_token, strtof(t->s_token, NULL));
+        return expr_create_float_value(strtof(t->s_token, NULL));
     } else {
         return NULL;
     }
@@ -203,7 +204,9 @@ void __print_ast(expr* t, int level) {
     for (int i = 0; i < level; i++) printf("    ");
 
     if (t->kind == EXPR_VALUE) {
-        printf("%d\n", t->value);
+        if (t->type == TYPE_INT) { printf("%d\n", t->value.i); }
+        if (t->type == TYPE_FLOAT) { printf("%f\n", t->value.f); }
+        //printf("%f\n", t->value.f);
     } else {
         printf("%s\n", expr_kind_symbol[t->kind]);
     }
