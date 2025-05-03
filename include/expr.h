@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #define NUMBER_OF_EXPR 5
+#define NUMBER_OF_REG 8
 
 typedef struct expr expr;
 
@@ -22,6 +23,16 @@ typedef enum {
     TYPE_ERROR,
 } type_t;
 
+typedef enum {
+    REG_UU,
+    REG_RBX,
+    REG_R10,
+    REG_R11,
+    REG_R12,
+    REG_R13,
+    REG_R14,
+    REG_R15,
+} reg_t;
 
 struct expr {
     expr_t kind;
@@ -32,10 +43,12 @@ struct expr {
         float f;
     } value;
     type_t type;
+    reg_t reg;
 };
 
 extern const char *EXPR_STR_MAP[NUMBER_OF_EXPR];
 extern const char* expr_kind_symbol[NUMBER_OF_EXPR];
+extern const char* REG_STR_MAP[NUMBER_OF_REG];
 
 expr* expr_create( expr_t kind,
                    expr *left,

@@ -8,5 +8,7 @@ type_t sap_expr_typecheck( expr* expr ){
 
     if (left_expr_type != right_expr_type){
         return TYPE_ERROR;
+    } else {
+        return left_expr_type;
     }
 }
