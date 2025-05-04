@@ -21,6 +21,7 @@ void expr_codegen(expr* ast){
     FILE* fp = fopen("out.as", "w");
     fprintf(fp, "\t.globl _start\n\t.text\n\n_start:\n");
     __expr_codegen(ast, fp);
+    fprintf(fp,"\tMOVQ $60, %%rax\n\tMOVQ %s, %%rdi\n\tSYSCALL\n", REG_STR_MAP[ast->reg]);
 }
 
 void __expr_codegen(expr* e, FILE* fp){

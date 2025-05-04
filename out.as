@@ -14,9 +14,12 @@ _start:
 	MOVQ %r10, %rax
 	IMUL %r11
 	MOVQ %rax, %r11
-	MOVQ $9, %r10
+	MOVQ $7, %r10
 	MOVQ %r11, %rax
 	CQO
 	IDIVQ %r10
 	MOVQ %rax, %r10
 	SUBQ %r10, %rbx
+	MOVQ $60, %rax
+	MOVQ %rbx, %rdi
+	SYSCALL
