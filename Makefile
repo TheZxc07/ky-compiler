@@ -1,31 +1,49 @@
 # Compiler
 CXX = gcc
-CXXFLAGS = -Wall -Iinclude
+CXXFLAGS = -Wall
 
 # Directories
-SRC_DIR = src
 BUILD_DIR = build
 
-# Source and Object files
-SRCS = $(wildcard $(SRC_DIR)/*.c)
-OBJS = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRCS))
+# SAP project
+SAP_SRC_DIR = sap_src
+SAP_INC_DIR = sap_include
+SAP_SRCS = $(wildcard $(SAP_SRC_DIR)/*.c)
+SAP_OBJS = $(patsubst $(SAP_SRC_DIR)/%.c, $(BUILD_DIR)/sap_%.o, $(SAP_SRCS))
+SAP_TARGET = $(BUILD_DIR)/sap_compiler.exe
 
-# Output executable
-TARGET = $(BUILD_DIR)/ky_compiler.exe
+# KY project
+KY_SRC_DIR = ky_src
+KY_INC_DIR = ky_include
+KY_SRCS = $(wildcard $(KY_SRC_DIR)/*.c)
+KY_OBJS = $(patsubst $(KY_SRC_DIR)/%.c, $(BUILD_DIR)/ky_%.o, $(KY_SRCS))
+KY_TARGET = $(BUILD_DIR)/ky_compiler.exe
 
-# Default target
-all: $(TARGET)
+# Default target builds both
+all: sap ky
 
-# Build the executable
-$(TARGET): $(OBJS)
+# SAP build rules
+sap: $(SAP_TARGET)
+
+$(SAP_TARGET): $(SAP_OBJS)
 	@mkdir -p $(BUILD_DIR)
-	$(CXX) $(OBJS) $(LDFLAGS) -o $(TARGET)
+	$(CXX) $(SAP_OBJS) -o $@
 
-# Compile source files
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+$(BUILD_DIR)/sap_%.o: $(SAP_SRC_DIR)/%.c
 	@mkdir -p $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I$(SAP_INC_DIR) -c $< -o $@
 
-# Clean build files
+# KY build rules
+ky: $(KY_TARGET)
+
+$(KY_TARGET): $(KY_OBJS)
+	@mkdir -p $(BUILD_DIR)
+	$(CXX) $(KY_OBJS) -o $@
+
+$(BUILD_DIR)/ky_%.o: $(KY_SRC_DIR)/%.c
+	@mkdir -p $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -I$(KY_INC_DIR) -c $< -o $@
+
+# Clean rule
 clean:
 	rm -rf $(BUILD_DIR)
