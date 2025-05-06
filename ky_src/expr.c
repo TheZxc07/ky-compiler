@@ -1,4 +1,4 @@
-#include "expr.h"
+#include "ast_primitives.h"
 
 const char *EXPR_STR_MAP[NUMBER_OF_EXPR] = {
     "EXPR_ADD     ",
@@ -41,7 +41,7 @@ expr* expr_create( expr_t kind,
 expr* expr_create_int_value( int value )
 {
     expr* e = expr_create(EXPR_VALUE,0,0);
-    e->type = TYPE_INT;
+    e->type = TYPE_INTEGER;
     e->value.i = value;
     //printf("%d", e->value.i);
     return e;
@@ -50,7 +50,7 @@ expr* expr_create_int_value( int value )
 expr* expr_create_float_value( float value )
 {
     expr* e = expr_create(EXPR_VALUE,0,0);
-    e->type = TYPE_FLOAT;
+    e->type = TYPE_CHARACTER;
     e->value.f = value;
     return e;
 }

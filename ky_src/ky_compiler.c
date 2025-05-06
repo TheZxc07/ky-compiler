@@ -1,7 +1,5 @@
 #include "token.h"
-#include "expr.h"
-#include "sap_type_check.h"
-#include "sap_codegen.h"
+#include "ast_primitives.h"
 #include <stdio.h>
 #include <string.h>
 
