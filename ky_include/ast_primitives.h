@@ -120,9 +120,13 @@ expr* expr_create_float_value( float value );
 
 
 decl* decl_create( char* name,
-    type* type,
-    expr* value,
-    stmt* code,
-    decl* next );
+                   type* type,
+                   expr* value,
+                   stmt* code,
+                   decl* next );
+
+type* type_create( type_t kind, 
+                   type* subtype,
+                   param_list* params);
 
 #endif

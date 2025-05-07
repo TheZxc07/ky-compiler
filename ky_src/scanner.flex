@@ -12,6 +12,7 @@ LETTER [a-zA-Z]
 \( { return TOKEN_LPAREN; }
 \) { return TOKEN_RPAREN; }
 \; { return TOKEN_SEMI; }
+\= { return TOKEN_ASSIGN; }
 while { return TOKEN_WHILE; }
 for { return TOKEN_FOR; }
 if { return TOKEN_IF; }
