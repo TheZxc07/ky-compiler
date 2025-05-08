@@ -67,14 +67,37 @@ extern int yydebug;
     TOKEN_FOR = 268,               /* TOKEN_FOR  */
     TOKEN_IF = 269,                /* TOKEN_IF  */
     TOKEN_IDENT = 270,             /* TOKEN_IDENT  */
-    TOKEN_FLOAT = 271              /* TOKEN_FLOAT  */
+    TOKEN_FLOAT = 271,             /* TOKEN_FLOAT  */
+    TOKEN_ASSIGN = 272,            /* TOKEN_ASSIGN  */
+    TOKEN_RBRACE = 273,            /* TOKEN_RBRACE  */
+    TOKEN_LBRACE = 274,            /* TOKEN_LBRACE  */
+    TOKEN_COMMA = 275,             /* TOKEN_COMMA  */
+    TOKEN_INT_TYPE = 276,          /* TOKEN_INT_TYPE  */
+    TOKEN_VOID_TYPE = 277,         /* TOKEN_VOID_TYPE  */
+    TOKEN_CHAR_TYPE = 278,         /* TOKEN_CHAR_TYPE  */
+    TOKEN_STRING_TYPE = 279        /* TOKEN_STRING_TYPE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
 
+#include "ast_primitives.h"
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 28 "parser.bison"
+
+    decl* decl;
+    stmt* stmt;
+    expr* expr;
+    type* type;
+    param_list* param_list;
+    char* name;
+
+#line 97 "token.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

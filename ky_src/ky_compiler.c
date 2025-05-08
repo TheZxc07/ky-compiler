@@ -10,12 +10,21 @@ extern int yyparse();
 
 int main() {
     //llist_t* token_list = create_token_list(); // token queue
-    yyin = fopen("./test_src/simple_prog.kysap","r"); // open sap program
+    yyin = fopen("./test_src/ky_prog.ky","r"); // open sap program
     if(!yyin) {
         printf("could not open program.kysap!\n");
         return 1;
     }
 
+    /*
+    while(1) {
+        yytoken_kind_t t = yylex();
+        if(t==YYEOF) break;
+        printf("token: %d text: %s\n",t,yytext);
+    }
+        
+    exit(1);
+    */
     if (yyparse()==0){
         printf("Parse successful!\n");
     } else {

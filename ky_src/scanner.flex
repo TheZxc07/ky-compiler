@@ -13,10 +13,14 @@ LETTER [a-zA-Z]
 \) { return TOKEN_RPAREN; }
 \; { return TOKEN_SEMI; }
 \= { return TOKEN_ASSIGN; }
+\, { return TOKEN_COMMA; }
+void { return TOKEN_VOID_TYPE; }
+int { return TOKEN_INT_TYPE; }
+string { return TOKEN_STRING_TYPE; }
 while { return TOKEN_WHILE; }
 for { return TOKEN_FOR; }
 if { return TOKEN_IF; }
-{LETTER}+ { return TOKEN_IDENT; }
+[a-zA-Z_][a-zA-Z0-9_]* { yylval.name = strdup(yytext); return TOKEN_IDENT; }
 {DIGIT}+\.{DIGIT}+ {return TOKEN_FLOAT; }
 {DIGIT}+ { return TOKEN_INT; }
 . { return TOKEN_ERROR; }

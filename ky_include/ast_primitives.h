@@ -127,6 +127,10 @@ decl* decl_create( char* name,
 
 type* type_create( type_t kind, 
                    type* subtype,
-                   param_list* params);
+                   param_list* params );
+
+param_list* param_list_create( char* name,
+                               type* type,
+                               param_list* next );
 
 #endif
