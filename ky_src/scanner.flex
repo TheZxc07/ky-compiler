@@ -11,6 +11,8 @@ LETTER [a-zA-Z]
 \/ { return TOKEN_DIV; }
 \( { return TOKEN_LPAREN; }
 \) { return TOKEN_RPAREN; }
+\{ { return TOKEN_LBRACE; }
+\} { return TOKEN_RBRACE; }
 \; { return TOKEN_SEMI; }
 \= { return TOKEN_ASSIGN; }
 \, { return TOKEN_COMMA; }

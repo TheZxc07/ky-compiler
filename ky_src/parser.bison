@@ -35,8 +35,8 @@ decl* parser_result = 0;
     char* name;
 };
 
-%type <decl> program decl_list decl 
 %type <stmt> stmt_list stmt
+%type <decl> program decl_list decl 
 %type <name> name
 %type <type> type
 %type <param_list> param_list param_list_no_name param param_no_name param_list_no_name_nonempty param_list_nonempty
@@ -55,10 +55,12 @@ decl_list : decl decl_list
 decl : type name TOKEN_LPAREN param_list TOKEN_RPAREN TOKEN_LBRACE stmt_list TOKEN_RBRACE /* func decl and init */
        { $$ = decl_create($2,$1,0,0,0); $1->params = $4; }
      | type name TOKEN_LPAREN TOKEN_RPAREN TOKEN_LBRACE stmt_list TOKEN_RBRACE /* func decl and init no params */
-       { $$ = decl_create($2,$1,0,0,0); }
+       { $$ = decl_create($2,$1,0,$6,0); }
+     | type name TOKEN_LPAREN param_list TOKEN_RPAREN TOKEN_SEMI /* func prototype */
+       { $$ = decl_create($2,$1,0,0,0); $1->params = $4; }
      | type name TOKEN_LPAREN param_list_no_name TOKEN_RPAREN TOKEN_SEMI /* func prototype no ident */
        { $$ = decl_create($2,$1,0,0,0); $1->params = $4; }
-     | type name TOKEN_LPAREN param_list TOKEN_RPAREN TOKEN_SEMI /* func prototype no params */
+     | type name TOKEN_LPAREN TOKEN_RPAREN TOKEN_SEMI /* func prototype no params */
        { $$ = decl_create($2,$1,0,0,0); }
      | type name TOKEN_SEMI /* global decl */
        { $$ = decl_create($2,$1,0,0,0); }
@@ -66,10 +68,13 @@ decl : type name TOKEN_LPAREN param_list TOKEN_RPAREN TOKEN_LBRACE stmt_list TOK
        { $$ = decl_create($2,$1,0,0,0); }
      ; 
 
-stmt_list : /* epsilon */ { $$ = 0; }
+stmt_list : stmt stmt_list { $$ = $1; $1->next = $2; }
+          | /* epsilon */ { $$ = 0; }
           ;
           
-stmt : TOKEN_IF { $$ = 0; }
+stmt : TOKEN_IF TOKEN_LPAREN expr TOKEN_RPAREN  { $$ = stmt_create(0,0,0,0,0,0,0,0); }
+     | TOKEN_FOR TOKEN_LPAREN TOKEN_SEMI TOKEN_SEMI TOKEN_RPAREN TOKEN_LBRACE stmt_list TOKEN_RBRACE 
+       { $$ = stmt_create(STMT_FOR,0,0,0,0,$7,0,0); }
      ;
 
 param_list_no_name : param_list_no_name_nonempty { $$ = $1; }

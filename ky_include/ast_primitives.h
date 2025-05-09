@@ -124,6 +124,15 @@ decl* decl_create( char* name,
                    expr* value,
                    stmt* code,
                    decl* next );
+           
+stmt* stmt_create( stmt_t kind,
+                   decl* decl,
+                   expr* value,
+                   expr* code,
+                   expr* next_expr, 
+                   stmt* body,
+                   stmt* else_body,
+                   stmt* next );
 
 type* type_create( type_t kind, 
                    type* subtype,

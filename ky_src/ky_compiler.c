@@ -7,6 +7,7 @@ extern FILE *yyin;
 extern int yylex();
 extern char *yytext;
 extern int yyparse();
+extern decl* parser_result;
 
 int main() {
     //llist_t* token_list = create_token_list(); // token queue
@@ -16,20 +17,23 @@ int main() {
         return 1;
     }
 
-    /*
-    while(1) {
-        yytoken_kind_t t = yylex();
-        if(t==YYEOF) break;
-        printf("token: %d text: %s\n",t,yytext);
-    }
+
+    // while(1) {
+    //     yytoken_kind_t t = yylex();
+    //     if(t==YYEOF) break;
+    //     printf("token: %d text: %s\n",t,yytext);
+    // }
         
-    exit(1);
-    */
+    // exit(1);
+    
+   
     if (yyparse()==0){
         printf("Parse successful!\n");
+        printf("%d", parser_result->code->kind);
     } else {
         printf("Parse failed.\n");
     }
+
 
     // while(1) {
     //     token_t t = yylex(); // scan next token in filestream according to RE rules

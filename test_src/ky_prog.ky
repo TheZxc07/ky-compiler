@@ -1,1 +1,5 @@
-void foo(int);
+void foo(){
+    for(;;){
+        
+    }
+}
