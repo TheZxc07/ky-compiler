@@ -16,6 +16,7 @@ LETTER [a-zA-Z]
 \; { return TOKEN_SEMI; }
 \= { return TOKEN_ASSIGN; }
 \, { return TOKEN_COMMA; }
+\% { return TOKEN_MODULO; }
 void { return TOKEN_VOID_TYPE; }
 int { return TOKEN_INT_TYPE; }
 string { return TOKEN_STRING_TYPE; }
@@ -24,7 +25,7 @@ for { return TOKEN_FOR; }
 if { return TOKEN_IF; }
 [a-zA-Z_][a-zA-Z0-9_]* { yylval.name = strdup(yytext); return TOKEN_IDENT; }
 {DIGIT}+\.{DIGIT}+ {return TOKEN_FLOAT; }
-{DIGIT}+ { return TOKEN_INT; }
+{DIGIT}+ { yylval.int_literal = atoi(yytext); return TOKEN_INT; }
 . { return TOKEN_ERROR; }
 %%
 int yywrap() { return 1; }

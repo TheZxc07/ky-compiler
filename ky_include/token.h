@@ -48,6 +48,7 @@ extern int yydebug;
 /* Token kinds.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
+#include "ast_primitives.h"
   enum yytokentype
   {
     YYEMPTY = -2,
@@ -59,33 +60,33 @@ extern int yydebug;
     TOKEN_MINUS = 260,             /* TOKEN_MINUS  */
     TOKEN_MUL = 261,               /* TOKEN_MUL  */
     TOKEN_DIV = 262,               /* TOKEN_DIV  */
-    TOKEN_LPAREN = 263,            /* TOKEN_LPAREN  */
-    TOKEN_RPAREN = 264,            /* TOKEN_RPAREN  */
-    TOKEN_SEMI = 265,              /* TOKEN_SEMI  */
-    TOKEN_ERROR = 266,             /* TOKEN_ERROR  */
-    TOKEN_WHILE = 267,             /* TOKEN_WHILE  */
-    TOKEN_FOR = 268,               /* TOKEN_FOR  */
-    TOKEN_IF = 269,                /* TOKEN_IF  */
-    TOKEN_IDENT = 270,             /* TOKEN_IDENT  */
-    TOKEN_FLOAT = 271,             /* TOKEN_FLOAT  */
-    TOKEN_ASSIGN = 272,            /* TOKEN_ASSIGN  */
-    TOKEN_RBRACE = 273,            /* TOKEN_RBRACE  */
-    TOKEN_LBRACE = 274,            /* TOKEN_LBRACE  */
-    TOKEN_COMMA = 275,             /* TOKEN_COMMA  */
-    TOKEN_INT_TYPE = 276,          /* TOKEN_INT_TYPE  */
-    TOKEN_VOID_TYPE = 277,         /* TOKEN_VOID_TYPE  */
-    TOKEN_CHAR_TYPE = 278,         /* TOKEN_CHAR_TYPE  */
-    TOKEN_STRING_TYPE = 279        /* TOKEN_STRING_TYPE  */
+    TOKEN_MODULO = 263,            /* TOKEN_MODULO  */
+    TOKEN_LPAREN = 264,            /* TOKEN_LPAREN  */
+    TOKEN_RPAREN = 265,            /* TOKEN_RPAREN  */
+    TOKEN_SEMI = 266,              /* TOKEN_SEMI  */
+    TOKEN_ERROR = 267,             /* TOKEN_ERROR  */
+    TOKEN_WHILE = 268,             /* TOKEN_WHILE  */
+    TOKEN_FOR = 269,               /* TOKEN_FOR  */
+    TOKEN_IF = 270,                /* TOKEN_IF  */
+    TOKEN_IDENT = 271,             /* TOKEN_IDENT  */
+    TOKEN_FLOAT = 272,             /* TOKEN_FLOAT  */
+    TOKEN_ASSIGN = 273,            /* TOKEN_ASSIGN  */
+    TOKEN_RBRACE = 274,            /* TOKEN_RBRACE  */
+    TOKEN_LBRACE = 275,            /* TOKEN_LBRACE  */
+    TOKEN_COMMA = 276,             /* TOKEN_COMMA  */
+    TOKEN_INT_TYPE = 277,          /* TOKEN_INT_TYPE  */
+    TOKEN_VOID_TYPE = 278,         /* TOKEN_VOID_TYPE  */
+    TOKEN_CHAR_TYPE = 279,         /* TOKEN_CHAR_TYPE  */
+    TOKEN_STRING_TYPE = 280        /* TOKEN_STRING_TYPE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
 
-#include "ast_primitives.h"
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 28 "parser.bison"
+#line 30 "parser.bison"
 
     decl* decl;
     stmt* stmt;
@@ -93,8 +94,9 @@ union YYSTYPE
     type* type;
     param_list* param_list;
     char* name;
+    int int_literal;
 
-#line 97 "token.h"
+#line 99 "token.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

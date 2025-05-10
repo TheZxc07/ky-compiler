@@ -29,7 +29,7 @@ int main() {
    
     if (yyparse()==0){
         printf("Parse successful!\n");
-        printf("%d", parser_result->code->kind);
+        printf("%d", parser_result->code->decl->value->value);
     } else {
         printf("Parse failed.\n");
     }

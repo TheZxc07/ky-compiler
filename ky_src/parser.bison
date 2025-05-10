@@ -3,11 +3,12 @@
 #include "ast_primitives.h"
 decl* parser_result = 0;
 %}
-%token TOKEN_INT
+%token <int_literal> TOKEN_INT
 %token TOKEN_PLUS
 %token TOKEN_MINUS
 %token TOKEN_MUL
 %token TOKEN_DIV
+%token TOKEN_MODULO
 %token TOKEN_LPAREN
 %token TOKEN_RPAREN
 %token TOKEN_SEMI
@@ -33,6 +34,7 @@ decl* parser_result = 0;
     type* type;
     param_list* param_list;
     char* name;
+    int int_literal;
 };
 
 %type <stmt> stmt_list stmt
@@ -40,6 +42,7 @@ decl* parser_result = 0;
 %type <name> name
 %type <type> type
 %type <param_list> param_list param_list_no_name param param_no_name param_list_no_name_nonempty param_list_nonempty
+%type <expr> expr term factor
 
 %%
 program : decl_list
@@ -62,10 +65,10 @@ decl : type name TOKEN_LPAREN param_list TOKEN_RPAREN TOKEN_LBRACE stmt_list TOK
        { $$ = decl_create($2,$1,0,0,0); $1->params = $4; }
      | type name TOKEN_LPAREN TOKEN_RPAREN TOKEN_SEMI /* func prototype no params */
        { $$ = decl_create($2,$1,0,0,0); }
-     | type name TOKEN_SEMI /* global decl */
+     | type name TOKEN_SEMI /* var decl */
        { $$ = decl_create($2,$1,0,0,0); }
-     | type name TOKEN_ASSIGN expr TOKEN_SEMI /* global decl and init */   
-       { $$ = decl_create($2,$1,0,0,0); }
+     | type name TOKEN_ASSIGN expr TOKEN_SEMI /* var decl and init */   
+       { $$ = decl_create($2,$1,$4,0,0); }
      ; 
 
 stmt_list : stmt stmt_list { $$ = $1; $1->next = $2; }
@@ -75,6 +78,7 @@ stmt_list : stmt stmt_list { $$ = $1; $1->next = $2; }
 stmt : TOKEN_IF TOKEN_LPAREN expr TOKEN_RPAREN  { $$ = stmt_create(0,0,0,0,0,0,0,0); }
      | TOKEN_FOR TOKEN_LPAREN TOKEN_SEMI TOKEN_SEMI TOKEN_RPAREN TOKEN_LBRACE stmt_list TOKEN_RBRACE 
        { $$ = stmt_create(STMT_FOR,0,0,0,0,$7,0,0); }
+     | decl { $$ = stmt_create(STMT_DECL,$1,0,0,0,0,0,0); } 
      ;
 
 param_list_no_name : param_list_no_name_nonempty { $$ = $1; }
@@ -108,15 +112,15 @@ type : TOKEN_VOID_TYPE { $$ = type_create(TYPE_VOID, 0, 0); }
 
 expr : expr TOKEN_PLUS term
      | expr TOKEN_MINUS term
-     | term
+     | term { $$ = $1; }
      ;
 term : term TOKEN_MUL factor
      | term TOKEN_DIV factor
-     | factor
+     | factor { $$ = $1; }
      ;
 factor : TOKEN_MINUS factor
        | TOKEN_LPAREN expr TOKEN_RPAREN
-       | TOKEN_INT
+       | TOKEN_INT { $$ = expr_create_value($1);}
        ;
 %%
 int yyerror( char *s ) {

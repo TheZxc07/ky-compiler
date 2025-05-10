@@ -87,10 +87,7 @@ struct expr {
     expr_t kind;
     expr* left;
     expr* right;
-    union{
-        int i;
-        float f;
-    } value;
+    int value;
     type_t type;
     reg_t reg;
 };
@@ -115,9 +112,7 @@ expr* expr_create( expr_t kind,
                    expr *left,
                    expr *right );
     
-expr* expr_create_int_value( int value );
-expr* expr_create_float_value( float value );        
-
+expr* expr_create_value( int value );
 
 decl* decl_create( char* name,
                    type* type,

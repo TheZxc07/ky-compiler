@@ -32,26 +32,17 @@ expr* expr_create( expr_t kind,
     e->reg = REG_UU;
     e->kind = kind;
     e->type = TYPE_VOID;
-    e->value.i = 0;
+    e->value = 0;
     e->left = left;
     e->right = right;
     return e;
 }
 
-expr* expr_create_int_value( int value )
+expr* expr_create_value( int value )
 {
     expr* e = expr_create(EXPR_VALUE,0,0);
     e->type = TYPE_INTEGER;
-    e->value.i = value;
+    e->value = value;
     //printf("%d", e->value.i);
     return e;
 }
-
-expr* expr_create_float_value( float value )
-{
-    expr* e = expr_create(EXPR_VALUE,0,0);
-    e->type = TYPE_CHARACTER;
-    e->value.f = value;
-    return e;
-}
-
