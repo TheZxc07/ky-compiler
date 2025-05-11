@@ -2,4 +2,9 @@ void foo(){
     int i = 7;
     for(;;){
     }
+
+    if (0) { 
+    } else {
+        int x = 10;
+    }
 }

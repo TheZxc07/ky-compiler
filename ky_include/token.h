@@ -68,16 +68,17 @@ extern int yydebug;
     TOKEN_WHILE = 268,             /* TOKEN_WHILE  */
     TOKEN_FOR = 269,               /* TOKEN_FOR  */
     TOKEN_IF = 270,                /* TOKEN_IF  */
-    TOKEN_IDENT = 271,             /* TOKEN_IDENT  */
-    TOKEN_FLOAT = 272,             /* TOKEN_FLOAT  */
-    TOKEN_ASSIGN = 273,            /* TOKEN_ASSIGN  */
-    TOKEN_RBRACE = 274,            /* TOKEN_RBRACE  */
-    TOKEN_LBRACE = 275,            /* TOKEN_LBRACE  */
-    TOKEN_COMMA = 276,             /* TOKEN_COMMA  */
-    TOKEN_INT_TYPE = 277,          /* TOKEN_INT_TYPE  */
-    TOKEN_VOID_TYPE = 278,         /* TOKEN_VOID_TYPE  */
-    TOKEN_CHAR_TYPE = 279,         /* TOKEN_CHAR_TYPE  */
-    TOKEN_STRING_TYPE = 280        /* TOKEN_STRING_TYPE  */
+    TOKEN_ELSE = 271,              /* TOKEN_ELSE  */
+    TOKEN_IDENT = 272,             /* TOKEN_IDENT  */
+    TOKEN_FLOAT = 273,             /* TOKEN_FLOAT  */
+    TOKEN_ASSIGN = 274,            /* TOKEN_ASSIGN  */
+    TOKEN_RBRACE = 275,            /* TOKEN_RBRACE  */
+    TOKEN_LBRACE = 276,            /* TOKEN_LBRACE  */
+    TOKEN_COMMA = 277,             /* TOKEN_COMMA  */
+    TOKEN_INT_TYPE = 278,          /* TOKEN_INT_TYPE  */
+    TOKEN_VOID_TYPE = 279,         /* TOKEN_VOID_TYPE  */
+    TOKEN_CHAR_TYPE = 280,         /* TOKEN_CHAR_TYPE  */
+    TOKEN_STRING_TYPE = 281        /* TOKEN_STRING_TYPE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -86,7 +87,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 30 "parser.bison"
+#line 31 "parser.bison"
 
     decl* decl;
     stmt* stmt;
@@ -96,7 +97,7 @@ union YYSTYPE
     char* name;
     int int_literal;
 
-#line 99 "token.h"
+#line 100 "token.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
