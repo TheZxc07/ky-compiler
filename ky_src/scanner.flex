@@ -24,6 +24,7 @@ while { return TOKEN_WHILE; }
 for { return TOKEN_FOR; }
 if { return TOKEN_IF; }
 else { return TOKEN_ELSE; }
+return { return TOKEN_RETURN; }
 [a-zA-Z_][a-zA-Z0-9_]* { yylval.name = strdup(yytext); return TOKEN_IDENT; }
 {DIGIT}+\.{DIGIT}+ {return TOKEN_FLOAT; }
 {DIGIT}+ { yylval.int_literal = atoi(yytext); return TOKEN_INT; }

@@ -20,6 +20,7 @@ decl* parser_result = 0;
 %token <name> TOKEN_IDENT
 %token TOKEN_FLOAT
 %token TOKEN_ASSIGN
+%token TOKEN_RETURN
 %token TOKEN_RBRACE
 %token TOKEN_LBRACE
 %token TOKEN_COMMA
@@ -82,7 +83,10 @@ stmt : TOKEN_IF TOKEN_LPAREN expr TOKEN_RPAREN TOKEN_LBRACE stmt_list TOKEN_RBRA
        { $$ = stmt_create(STMT_IF_ELSE,0,0,$3,0,$6,$10,0); } /* if-else with multiple stmts */
      | TOKEN_FOR TOKEN_LPAREN TOKEN_SEMI TOKEN_SEMI TOKEN_RPAREN TOKEN_LBRACE stmt_list TOKEN_RBRACE 
        { $$ = stmt_create(STMT_FOR,0,0,0,0,$7,0,0); }
+     | TOKEN_WHILE TOKEN_LPAREN expr TOKEN_RPAREN TOKEN_LBRACE stmt_list TOKEN_RBRACE
+       { $$ = stmt_create(STMT_IF_ELSE,0,0,$3,0,$6,0,0); }
      | decl { $$ = stmt_create(STMT_DECL,$1,0,0,0,0,0,0); } 
+     | TOKEN_RETURN TOKEN_SEMI { $$ = stmt_create(STMT_RETURN,0,0,0,0,0,0,0); }
      ;
 
 param_list_no_name : param_list_no_name_nonempty { $$ = $1; }

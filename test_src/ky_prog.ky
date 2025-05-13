@@ -7,4 +7,6 @@ void foo(){
     } else {
         int x = 10;
     }
+
+    return;
 }
