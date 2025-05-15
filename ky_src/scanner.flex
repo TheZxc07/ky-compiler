@@ -17,6 +17,8 @@ LETTER [a-zA-Z]
 \= { return TOKEN_ASSIGN; }
 \, { return TOKEN_COMMA; }
 \% { return TOKEN_MODULO; }
+\! { return TOKEN_NOT; }
+\~ { return TOKEN_BW_NOT; }
 void { return TOKEN_VOID_TYPE; }
 int { return TOKEN_INT_TYPE; }
 string { return TOKEN_STRING_TYPE; }

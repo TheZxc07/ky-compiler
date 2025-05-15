@@ -7,6 +7,7 @@ void foo(){
     } else {
         int x = 10;
     }
+    int my_var = (~i)*7;
 
     return;
 }

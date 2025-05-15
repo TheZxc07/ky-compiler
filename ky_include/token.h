@@ -63,23 +63,25 @@ extern int yydebug;
     TOKEN_MODULO = 263,            /* TOKEN_MODULO  */
     TOKEN_LPAREN = 264,            /* TOKEN_LPAREN  */
     TOKEN_RPAREN = 265,            /* TOKEN_RPAREN  */
-    TOKEN_SEMI = 266,              /* TOKEN_SEMI  */
-    TOKEN_ERROR = 267,             /* TOKEN_ERROR  */
-    TOKEN_WHILE = 268,             /* TOKEN_WHILE  */
-    TOKEN_FOR = 269,               /* TOKEN_FOR  */
-    TOKEN_IF = 270,                /* TOKEN_IF  */
-    TOKEN_ELSE = 271,              /* TOKEN_ELSE  */
-    TOKEN_IDENT = 272,             /* TOKEN_IDENT  */
-    TOKEN_FLOAT = 273,             /* TOKEN_FLOAT  */
-    TOKEN_ASSIGN = 274,            /* TOKEN_ASSIGN  */
-    TOKEN_RETURN = 275,            /* TOKEN_RETURN  */
-    TOKEN_RBRACE = 276,            /* TOKEN_RBRACE  */
-    TOKEN_LBRACE = 277,            /* TOKEN_LBRACE  */
-    TOKEN_COMMA = 278,             /* TOKEN_COMMA  */
-    TOKEN_INT_TYPE = 279,          /* TOKEN_INT_TYPE  */
-    TOKEN_VOID_TYPE = 280,         /* TOKEN_VOID_TYPE  */
-    TOKEN_CHAR_TYPE = 281,         /* TOKEN_CHAR_TYPE  */
-    TOKEN_STRING_TYPE = 282        /* TOKEN_STRING_TYPE  */
+    TOKEN_NOT = 266,               /* TOKEN_NOT  */
+    TOKEN_BW_NOT = 267,            /* TOKEN_BW_NOT  */
+    TOKEN_SEMI = 268,              /* TOKEN_SEMI  */
+    TOKEN_ERROR = 269,             /* TOKEN_ERROR  */
+    TOKEN_WHILE = 270,             /* TOKEN_WHILE  */
+    TOKEN_FOR = 271,               /* TOKEN_FOR  */
+    TOKEN_IF = 272,                /* TOKEN_IF  */
+    TOKEN_ELSE = 273,              /* TOKEN_ELSE  */
+    TOKEN_IDENT = 274,             /* TOKEN_IDENT  */
+    TOKEN_FLOAT = 275,             /* TOKEN_FLOAT  */
+    TOKEN_ASSIGN = 276,            /* TOKEN_ASSIGN  */
+    TOKEN_RETURN = 277,            /* TOKEN_RETURN  */
+    TOKEN_RBRACE = 278,            /* TOKEN_RBRACE  */
+    TOKEN_LBRACE = 279,            /* TOKEN_LBRACE  */
+    TOKEN_COMMA = 280,             /* TOKEN_COMMA  */
+    TOKEN_INT_TYPE = 281,          /* TOKEN_INT_TYPE  */
+    TOKEN_VOID_TYPE = 282,         /* TOKEN_VOID_TYPE  */
+    TOKEN_CHAR_TYPE = 283,         /* TOKEN_CHAR_TYPE  */
+    TOKEN_STRING_TYPE = 284        /* TOKEN_STRING_TYPE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -88,7 +90,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 32 "parser.bison"
+#line 34 "parser.bison"
 
     decl* decl;
     stmt* stmt;
@@ -98,7 +100,7 @@ union YYSTYPE
     char* name;
     int int_literal;
 
-#line 101 "token.h"
+#line 103 "token.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

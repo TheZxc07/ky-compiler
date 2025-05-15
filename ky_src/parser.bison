@@ -11,6 +11,8 @@ decl* parser_result = 0;
 %token TOKEN_MODULO
 %token TOKEN_LPAREN
 %token TOKEN_RPAREN
+%token TOKEN_NOT
+%token TOKEN_BW_NOT
 %token TOKEN_SEMI
 %token TOKEN_ERROR
 %token TOKEN_WHILE
@@ -44,7 +46,7 @@ decl* parser_result = 0;
 %type <name> name
 %type <type> type
 %type <param_list> param_list param_list_no_name param param_no_name param_list_no_name_nonempty param_list_nonempty
-%type <expr> expr term factor
+%type <expr> expr factor0 factor1 factor2
 
 %%
 program : decl_list
@@ -118,18 +120,28 @@ type : TOKEN_VOID_TYPE { $$ = type_create(TYPE_VOID, 0, 0); }
      ;
 
 
-expr : expr TOKEN_PLUS term
-     | expr TOKEN_MINUS term
-     | term { $$ = $1; }
+expr : expr TOKEN_PLUS factor2
+     | expr TOKEN_MINUS factor2
+     | factor2 { $$ = $1; }
      ;
-term : term TOKEN_MUL factor
-     | term TOKEN_DIV factor
-     | factor { $$ = $1; }
-     ;
-factor : TOKEN_MINUS factor
-       | TOKEN_LPAREN expr TOKEN_RPAREN
-       | TOKEN_INT { $$ = expr_create_value($1);}
-       ;
+
+factor0 : TOKEN_LPAREN expr TOKEN_RPAREN
+        | TOKEN_INT { $$ = expr_create_value($1); }
+        | name
+        ;
+
+factor1 : TOKEN_MINUS factor1
+        | TOKEN_PLUS factor1
+        | TOKEN_NOT factor1
+        | TOKEN_BW_NOT factor1
+        | factor0 { $$ = $1; }
+        ;
+
+factor2 : factor2 TOKEN_MUL factor1
+        | factor2 TOKEN_DIV factor1
+        | factor2 TOKEN_MODULO factor1
+        | factor1 { $$ = $1; }
+
 %%
 int yyerror( char *s ) {
 printf("parse error: %s\n",s);
